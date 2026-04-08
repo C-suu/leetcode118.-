@@ -15,12 +15,13 @@
 
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        c = [[1] * (i + 1) for i in range(numRows)]
-        for i in range(2, numRows):
-            for j in range(1, i):
-                # 左上方的数 + 正上方的数
-                c[i][j] = c[i - 1][j - 1] + c[i - 1][j]
-        return c
+        c = [[1] * (i + 1) for i in range(numRows)]  # 初始化一个全部由 1 组成的二维列表，每行长度递增
+        for i in range(2, numRows):                  # 从第三行（下标2）开始逐行向下遍历
+            for j in range(1, i):                    # 遍历当前行的内部元素（避开下标0和下标i的边缘1）
+                # 核心公式：当前元素 = 上一行左侧元素 + 上一行同列元素
+                c[i][j] = c[i - 1][j - 1] + c[i - 1][j]  # 左上方的数 + 正上方的数
+        return c                                     # 计算完毕，返回完整的杨辉三角
+
 ```
 
 
